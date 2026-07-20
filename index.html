@@ -3,17 +3,18 @@
 <head>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; padding: 20px; color: #333; }
-        .form-container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: auto; }
+        .form-container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: 20px auto; }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         .row { display: flex; gap: 15px; margin-top: 15px; }
         .row > div { flex: 1; }
-        .btn-add { color: #007bff; cursor: pointer; font-weight: bold; margin-top: 15px; display: inline-block; font-size: 14px; }
+        .btn-submit { width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
     </style>
 </head>
 <body>
 
+<!-- 1. Booking Form -->
 <div class="form-container">
     <div class="form-group">
         <label>Select Service Type</label>
@@ -27,99 +28,42 @@
     <div id="fieldsContainer"></div>
 </div>
 
-<script>
-const fields = {
-    transfer: `
-        <label>Pickup Location</label><input type="text" placeholder="Pick up">
-        <label style="margin-top:10px">Dropoff Location</label><input type="text" placeholder="Drop off">
-        <div class="row">
-            <div><label>Date</label><input type="date"></div>
-            <div><label>Time</label><input type="time"></div>
-        </div>
-        <div class="row">
-            <div><label>Adults</label><input type="number" value="1" min="1"></div>
-            <div><label>Children</label><input type="number" value="0" min="0"></div>
-        </div>
-        `,
-    
-    'per-hour': `
-        <label>Pickup Location</label><input type="text" placeholder="Pick up">
-        <div class="row">
-            <div><label>Date</label><input type="date"></div>
-            <div><label>Time</label><input type="time"></div>
-        </div>
-        <label style="margin-top:15px">Duration (Hours)</label><input type="number" placeholder="e.g. 3">`,
-        
-    'from-airport': `
-        <label>Flight Number</label><input type="text" placeholder="e.g. AA123">
-        <label style="margin-top:10px">Airport / Pickup</label><input type="text">
-        <label style="margin-top:10px">Dropoff Location</label><input type="text">
-        <div class="row">
-            <div><label>Date</label><input type="date"></div>
-            <div><label>Time</label><input type="time"></div>
-        </div>
-        <div class="row">
-            <div><label>Adults</label><input type="number" value="1" min="1"></div>
-            <div><label>Children</label><input type="number" value="0" min="0"></div>
-        </div>
-        <label style="margin-top:15px">Luggage Count</label><input type="number" value="0" min="0">
-        `,
-
-    'to-airport': `
-        <label>Pickup Location</label><input type="text">
-        <label style="margin-top:10px">Airport / Dropoff</label><input type="text">
-        <div class="row">
-            <div><label>Date</label><input type="date"></div>
-            <div><label>Time</label><input type="time"></div>
-        </div>
-        <div class="row">
-            <div><label>Adults</label><input type="number" value="1" min="1"></div>
-            <div><label>Children</label><input type="number" value="0" min="0"></div>
-        </div>
-        <label style="margin-top:15px">Luggage Count</label><input type="number" value="0" min="0">
-
-
-<h3>Research Sources</h3>
-<ul>
-    <li><a href="https://www.chauffeureverywhere.com/" target="_blank">Chauffeur Everywhere</a></li>
-    <li><a href="https://daytrip.com/" target="_blank">Daytrip</a></li>
-    <li><a href="https://www.airportexecutive.com/" target="_blank">Airport Executive</a></li>
-    <li><a href="https://www.transfeero.com/en/" target="_blank">Transfeero</a></li>
-    <li><a href="https://limotak.com/" target="_blank">Limotak</a></li>
-    <li><a href="https://accounts.drivania.com/sign-up" target="_blank">Drivania</a></li>
-</ul>
-
-
+<!-- 2. Customer Details Form -->
 <div class="form-container">
+    <h3>Customer Details</h3>
     <form>
-        <div class="form-group">
-            <label>Full Name</label>
-            <input type="text" placeholder="Enter your full name" required>
-        </div>
-        <div class="form-group">
-            <label>Email Address</label>
-            <input type="email" placeholder="example@mail.com" required>
-        </div>
-        <div class="form-group">
-            <label>Phone Number</label>
-            <input type="tel" placeholder="+1 234 567 8900" required>
-        </div>
-        <div class="form-group">
-            <label>Contact Number (Alternative)</label>
-            <input type="tel" placeholder="+1 234 567 8900">
-        </div>
-        <button type="submit" style="width: 100%; padding: 12px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer;">Save Details</button>
+        <div class="form-group"><label>Full Name</label><input type="text" required></div>
+        <div class="form-group"><label>Email Address</label><input type="email" required></div>
+        <div class="form-group"><label>Phone Number</label><input type="tel" required></div>
+        <div class="form-group"><label>Alternative Contact</label><input type="tel"></div>
+        <button type="submit" class="btn-submit">Save Details</button>
     </form>
 </div>
-      `
+
+<!-- 3. Research Sources -->
+<div class="form-container">
+    <h3>Research Sources</h3>
+    <ul>
+        <li><a href="https://www.chauffeureverywhere.com/" target="_blank">Chauffeur Everywhere</a></li>
+        <li><a href="https://daytrip.com/" target="_blank">Daytrip</a></li>
+        <li><a href="https://www.airportexecutive.com/" target="_blank">Airport Executive</a></li>
+        <li><a href="https://www.transfeero.com/en/" target="_blank">Transfeero</a></li>
+        <li><a href="https://limotak.com/" target="_blank">Limotak</a></li>
+        <li><a href="https://accounts.drivania.com/sign-up" target="_blank">Drivania</a></li>
+    </ul>
+</div>
+
+<script>
+const fields = {
+    transfer: `<label>Pickup Location</label><input type="text"><label>Dropoff</label><input type="text"><div class="row"><div><label>Date</label><input type="date"></div><div><label>Time</label><input type="time"></div></div><div class="row"><div><label>Adults</label><input type="number" value="1"></div><div><label>Children</label><input type="number" value="0"></div></div>`,
+    'per-hour': `<label>Pickup Location</label><input type="text"><div class="row"><div><label>Date</label><input type="date"></div><div><label>Time</label><input type="time"></div></div><label>Duration (Hours)</label><input type="number">`,
+    'from-airport': `<label>Flight Number</label><input type="text"><label>Airport / Pickup</label><input type="text"><label>Dropoff</label><input type="text"><div class="row"><div><label>Date</label><input type="date"></div><div><label>Time</label><input type="time"></div></div><div class="row"><div><label>Adults</label><input type="number" value="1"></div><div><label>Children</label><input type="number" value="0"></div></div><label>Luggage</label><input type="number" value="0">`,
+    'to-airport': `<label>Pickup Location</label><input type="text"><label>Airport / Dropoff</label><input type="text"><div class="row"><div><label>Date</label><input type="date"></div><div><label>Time</label><input type="time"></div></div><div class="row"><div><label>Adults</label><input type="number" value="1"></div><div><label>Children</label><input type="number" value="0"></div></div><label>Luggage</label><input type="number" value="0">`
 };
 
 function renderForm() {
-    const type = document.getElementById('serviceType').value;
-    document.getElementById('fieldsContainer').innerHTML = fields[type];
+    document.getElementById('fieldsContainer').innerHTML = fields[document.getElementById('serviceType').value];
 }
-
-// Initialize on page load
 renderForm();
 </script>
 
