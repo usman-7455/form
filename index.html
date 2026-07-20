@@ -3,23 +3,20 @@
 <head>
     <style>
         body { font-family: sans-serif; background: #f4f4f4; padding: 20px; color: #333; }
-        .form-container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .form-container { max-width: 500px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); margin: auto; }
         .form-group { margin-bottom: 20px; }
         label { display: block; font-weight: bold; margin-bottom: 8px; font-size: 14px; }
         input, select { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        .row { display: flex; gap: 15px; }
+        .row { display: flex; gap: 15px; margin-top: 15px; }
         .row > div { flex: 1; }
-        .counter { display: flex; border: 1px solid #ccc; border-radius: 4px; overflow: hidden; }
-        .counter button { width: 40px; border: none; background: #f0f0f0; cursor: pointer; }
-        .counter input { border: none; text-align: center; border-left: 1px solid #ccc; border-right: 1px solid #ccc; border-radius: 0; }
-        .btn-add { color: #007bff; cursor: pointer; font-weight: bold; margin-top: 10px; display: inline-block; }
+        .btn-add { color: #007bff; cursor: pointer; font-weight: bold; margin-top: 15px; display: inline-block; font-size: 14px; }
     </style>
 </head>
 <body>
 
 <div class="form-container">
     <div class="form-group">
-        <label>Service Type</label>
+        <label>Select Service Type</label>
         <select id="serviceType" onchange="renderForm()">
             <option value="transfer">TRANSFER</option>
             <option value="per-hour">PER HOUR</option>
@@ -35,15 +32,19 @@ const fields = {
     transfer: `
         <label>Pickup Location</label><input type="text" placeholder="Pick up">
         <label style="margin-top:10px">Dropoff Location</label><input type="text" placeholder="Drop off">
-        <div class="row" style="margin-top:15px">
+        <div class="row">
             <div><label>Date</label><input type="date"></div>
             <div><label>Time</label><input type="time"></div>
         </div>
-        <label style="margin-top:15px">Passengers</label><input type="number" value="1">`,
+        <div class="row">
+            <div><label>Adults</label><input type="number" value="1" min="1"></div>
+            <div><label>Children</label><input type="number" value="0" min="0"></div>
+        </div>
+        `,
     
     'per-hour': `
         <label>Pickup Location</label><input type="text" placeholder="Pick up">
-        <div class="row" style="margin-top:15px">
+        <div class="row">
             <div><label>Date</label><input type="date"></div>
             <div><label>Time</label><input type="time"></div>
         </div>
@@ -53,26 +54,30 @@ const fields = {
         <label>Flight Number</label><input type="text" placeholder="e.g. AA123">
         <label style="margin-top:10px">Airport / Pickup</label><input type="text">
         <label style="margin-top:10px">Dropoff Location</label><input type="text">
-        <div class="row" style="margin-top:15px">
+        <div class="row">
             <div><label>Date</label><input type="date"></div>
             <div><label>Time</label><input type="time"></div>
         </div>
-        <div class="row" style="margin-top:15px">
-            <div><label>Passengers</label><input type="number" value="1"></div>
-            <div><label>Luggage</label><input type="number" value="0"></div>
-        </div>`,
+        <div class="row">
+            <div><label>Adults</label><input type="number" value="1" min="1"></div>
+            <div><label>Children</label><input type="number" value="0" min="0"></div>
+        </div>
+        <label style="margin-top:15px">Luggage Count</label><input type="number" value="0" min="0">
+        `,
 
     'to-airport': `
         <label>Pickup Location</label><input type="text">
         <label style="margin-top:10px">Airport / Dropoff</label><input type="text">
-        <div class="row" style="margin-top:15px">
+        <div class="row">
             <div><label>Date</label><input type="date"></div>
             <div><label>Time</label><input type="time"></div>
         </div>
-        <div class="row" style="margin-top:15px">
-            <div><label>Passengers</label><input type="number" value="1"></div>
-            <div><label>Luggage</label><input type="number" value="0"></div>
-        </div>`
+        <div class="row">
+            <div><label>Adults</label><input type="number" value="1" min="1"></div>
+            <div><label>Children</label><input type="number" value="0" min="0"></div>
+        </div>
+        <label style="margin-top:15px">Luggage Count</label><input type="number" value="0" min="0">
+      `
 };
 
 function renderForm() {
@@ -80,7 +85,8 @@ function renderForm() {
     document.getElementById('fieldsContainer').innerHTML = fields[type];
 }
 
-renderForm(); // Initial load
+// Initialize on page load
+renderForm();
 </script>
 
 </body>
